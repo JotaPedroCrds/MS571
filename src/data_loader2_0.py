@@ -1,13 +1,11 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import Levenshtein as lev
-from scipy.stats import ttest_ind
 import unicodedata
 
 # Dados de Volumetria do Almoço
 
-df_volumetria_almoco = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\volumetria_almoco.csv')
+df_volumetria_almoco = pd.read_csv(r'...\data\volumetria_almoco.csv')
 
 def try_parsing_datetime(x):
     fmt = '%Y-%m-%d'
@@ -20,14 +18,14 @@ df_volumetria_almoco['Data'] = df_volumetria_almoco['Data'].apply(try_parsing_da
 
 # Dados de Volumetria da Janta
 
-df_volumetria_janta = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\volumetria_janta.csv')
+df_volumetria_janta = pd.read_csv(r'...\data\volumetria_janta.csv')
 
 df_volumetria_janta['Data'] = df_volumetria_janta['Data'].apply(try_parsing_datetime)
 
 
 # Dados do Cardápio
 
-df_cardapio = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\cardapio.csv')
+df_cardapio = pd.read_csv(r'...\data\cardapio.csv')
 
 
 df_cardapio['date'] = df_cardapio['date'].apply(try_parsing_datetime)
@@ -39,7 +37,7 @@ df_cardapio_janta_padrao = df_cardapio.loc[df_cardapio['refeicao'] == "Jantar - 
 
 # Dados de Precipitação 2024
 
-df_precipitacao_2024 = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\precip_horarios_2024_Cepagri.csv')
+df_precipitacao_2024 = pd.read_csv(r'...\data\precip_horarios_2024_Cepagri.csv')
 
 
 prec_por_refeicao_2024 = df_precipitacao_2024["Precipitação"].groupby(df_precipitacao_2024.index // 12).sum()
@@ -59,7 +57,7 @@ df_prec_janta_2024 = df_prec_por_refeicao_2024.loc[df_prec_por_refeicao_2024['Re
 # Dados de Precipitação 2025
 
 
-df_precipitacao_2025 = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\precip_horarios_2025parcial_Cepagri.csv')
+df_precipitacao_2025 = pd.read_csv(r'...\data\precip_horarios_2025parcial_Cepagri.csv')
 
 
 prec_por_refeicao_2025 = df_precipitacao_2025["Precipitação"].groupby(df_precipitacao_2025.index // 12).sum()
@@ -248,4 +246,4 @@ def load_data(restaurante):
 
 
     return (training_data_almoco, test_data_almoco, training_data_janta, test_data_janta)
-    #return (main_almoco_sem_nan, main_janta_sem_nan)
+
