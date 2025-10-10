@@ -1,5 +1,5 @@
 """
-mnist_svm
+svm
 ~~~~~~~~~
 
 Implementação do modelo Support Vector Machine para classificar
@@ -37,5 +37,6 @@ def svm_baseline():
 if __name__ == "__main__":
     svm_baseline()
     
+
 
 
