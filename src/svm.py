@@ -2,14 +2,14 @@
 mnist_svm
 ~~~~~~~~~
 
-A classifier program for recognizing handwritten digits from the MNIST
-data set, using an SVM classifier."""
+Implementação do modelo Support Vector Machine para classificar
+intervalo de volumetria de refeição nos restaurantes universitários"""
 
-#### Libraries
-# My libraries
+#### Bibliotecas
+# Locais
 import data_loader
 
-# Third-party libraries
+# Auxiliares
 from sklearn import svm
 import numpy as np
 
@@ -37,3 +37,4 @@ def svm_baseline():
 if __name__ == "__main__":
     svm_baseline()
     
+
