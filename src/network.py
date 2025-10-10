@@ -120,10 +120,10 @@ def sigmoid_prime(z):
 
 """Implementação"""
 
-import data_loader2_0
-training_data_almoco_RU, test_data_almoco_RU, training_data_janta_RU, test_data_janta_RU = data_loader2_0.load_data("RU")
-training_data_almoco_RS, test_data_almoco_RS, training_data_janta_RS, test_data_janta_RS = data_loader2_0.load_data("RS")
-training_data_almoco_RA, test_data_almoco_RA, training_data_janta_RA, test_data_janta_RA = data_loader2_0.load_data("RA")
+import data_loader
+training_data_almoco_RU, test_data_almoco_RU, training_data_janta_RU, test_data_janta_RU = data_loader.load_data("RU")
+training_data_almoco_RS, test_data_almoco_RS, training_data_janta_RS, test_data_janta_RS = data_loader.load_data("RS")
+training_data_almoco_RA, test_data_almoco_RA, training_data_janta_RA, test_data_janta_RA = data_loader.load_data("RA")
 
 net = Network([4,20,20,20,10])
 print("Almoço RU")
@@ -140,3 +140,4 @@ print("Almoço RA")
 net.SGD(training_data_almoco_RA, 6, 50, 5.0, test_data=test_data_almoco_RA)
 print("Janta RA")
 net.SGD(training_data_janta_RA, 6, 50, 5.0, test_data=test_data_janta_RA)
+
