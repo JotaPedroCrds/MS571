@@ -14,7 +14,7 @@ from sklearn import svm
 import numpy as np
 
 def svm_baseline():
-    training_data_almoco, test_data_almoco, training_data_janta, training_data_janta = data_loader.load_data('RA')
+    training_data_almoco, test_data_almoco, training_data_janta, training_data_janta = data_loader.load_data(restaurante)
     treino_0 = []
     treino_1 = []
     for i in range(len(training_data_almoco)):
@@ -25,10 +25,10 @@ def svm_baseline():
     for j in range(len(test_data_almoco)):
         test_0.append(test_data_almoco[j][0])
         test_1.append(np.argmax(test_data_almoco[j][1]))
-    # train
+    # treinamento
     clf = svm.SVC()
     clf.fit(treino_0, treino_1)
-    # test
+    # teste
     predictions = [int(a) for a in clf.predict(test_0)]
     num_correct = sum(int(a == y) for a, y in zip(predictions, test_1))
     print("Baseline classifier using an SVM.")
@@ -37,4 +37,5 @@ def svm_baseline():
 if __name__ == "__main__":
     svm_baseline()
     
+
 
