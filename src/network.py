@@ -69,6 +69,7 @@ class Network(object):
                        for b, nb in zip(self.biases, theta_b)]
         
     def adam(self, grad_b, grad_w, state, eta):
+        "Função responsável pelo método de Adam"
         beta_1 = 0.9
         beta_2 = 0.999
         eps = 10**(-8)
@@ -170,23 +171,3 @@ net_RS_a = Network([4,20,20,10])
 net_RS_j = Network([4,20,20,10])
 net_RA_a = Network([4,20,20,10])
 net_RA_j = Network([4,20,20,10])
-
-#print("RU todos")
-#net_RU.SGD(training_data_RU, 20, 20, 0.75, test_data=test_data_RU)
-print("Almoço RU")
-net_RU_a.SGD(training_data_almoco_RU, 50, 15, 0.001, test_data=test_data_almoco_RU)
-print("Janta RU")
-net_RU_j.SGD(training_data_janta_RU, 50, 15, 0.001, test_data=test_data_janta_RU)
-
-print("Almoço RS")
-net_RS_a.SGD(training_data_almoco_RS, 50, 15, 0.001, test_data=test_data_almoco_RS)
-
-print("Janta RS")
-net_RS_j.SGD(training_data_janta_RS, 50, 15, 0.001, test_data=test_data_janta_RS)
-
-print("Almoço RA")
-net_RA_a.SGD(training_data_almoco_RA, 50, 15, 0.001, test_data=test_data_almoco_RA)
-
-print("Janta RA")
-net_RA_j.SGD(training_data_janta_RA, 50, 15, 0.001, test_data=test_data_janta_RA)
-
