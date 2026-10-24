@@ -8,7 +8,7 @@ import datetime
 
 # Dados de Volumetria do Almoço
 
-df_volumetria_almoco = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\volumetria_almoco.csv')
+df_volumetria_almoco = pd.read_csv(r'data\volumetria_almoco.csv')
 
 def try_parsing_datetime(x):
     fmt = '%Y-%m-%d'
