@@ -8,7 +8,7 @@ import datetime
 
 # Dados de Volumetria do Almoço
 
-df_volumetria_almoco = pd.read_csv(r'C:\Users\João Pedro\Pessoal\Estudos\MS571\data\volumetria_almoco.csv')
+df_volumetria_almoco = pd.read_csv(r'data\volumetria_almoco.csv')
 
 def try_parsing_datetime(x):
     fmt = '%Y-%m-%d'
@@ -303,14 +303,14 @@ def load_data(restaurante):
 
     # Dados de treino e teste pro almoço
     for i in range(len(dados_treino_almoço.index)):
-        training_data_almoco.append([[int(dados_treino_almoço["Valor Dia da Semana"].iloc[i]), valor_mes[dados_treino_almoço.index[i].month - 1], int(dados_treino_almoço["Precipitação"].iloc[i])/1000, int(dados_treino_almoço["Valor Cardapio"].iloc[i])], result_training_almoco[i]])
+        training_data_almoco.append([[int(dados_treino_almoço["Valor Dia da Semana"].iloc[i])/5, valor_mes[dados_treino_almoço.index[i].month - 1]/4, int(dados_treino_almoço["Precipitação"].iloc[i])/1000, int(dados_treino_almoço["Valor Cardapio"].iloc[i])/3], result_training_almoco[i]])
     for i in range(len(dados_test_almoço.index)):
-        test_data_almoco.append([[int(dados_test_almoço["Valor Dia da Semana"].iloc[i]), valor_mes[dados_test_almoço.index[i].month - 1], int(dados_test_almoço["Precipitação"].iloc[i])/1000, int(dados_test_almoço["Valor Cardapio"].iloc[i])], result_test_almoco[i]])
+        test_data_almoco.append([[int(dados_test_almoço["Valor Dia da Semana"].iloc[i])/5, valor_mes[dados_test_almoço.index[i].month - 1]/4, int(dados_test_almoço["Precipitação"].iloc[i])/1000, int(dados_test_almoço["Valor Cardapio"].iloc[i])/3], result_test_almoco[i]])
     #Dados de treino e teste pra janta
     for i in range(len(dados_treino_janta.index)):
-        training_data_janta.append([[int(dados_treino_janta["Valor Dia da Semana"].iloc[i]), valor_mes[dados_treino_janta.index[i].month - 1], int(dados_treino_janta["Precipitação"].iloc[i])/1000, nota_training_janta[i]], result_training_janta[i]])
+        training_data_janta.append([[int(dados_treino_janta["Valor Dia da Semana"].iloc[i])/5, valor_mes[dados_treino_janta.index[i].month - 1]/4, int(dados_treino_janta["Precipitação"].iloc[i])/1000, nota_training_janta[i]/3], result_training_janta[i]])
     for i in range(len(dados_test_janta.index)):
-        test_data_janta.append([[int(dados_test_janta["Valor Dia da Semana"].iloc[i]), valor_mes[dados_test_janta.index[i].month - 1], int(dados_test_janta["Precipitação"].iloc[i])/1000, nota_test_janta[i]], result_test_janta[i]])
+        test_data_janta.append([[int(dados_test_janta["Valor Dia da Semana"].iloc[i])/5, valor_mes[dados_test_janta.index[i].month - 1]/4, int(dados_test_janta["Precipitação"].iloc[i])/1000, nota_test_janta[i]/3], result_test_janta[i]])
 
     return (training_data_almoco, test_data_almoco, training_data_janta, test_data_janta)
 

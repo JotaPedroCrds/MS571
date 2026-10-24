@@ -30,8 +30,11 @@ class Network(object):
 
     def feedforward(self, a):
         """Função que retorna a saída de uma entrada ``a`` na rede neural."""
-        for b, w in zip(self.biases, self.weights):
-            a = sigmoid(np.dot(w, a)+b)
+        for b, w in zip(self.biases[:-2], self.weights[:-2]):
+            a = ReLU(np.dot(w, a)+b)
+        b = self.biases[-1]
+        w = self.weights[-1]
+        a = sigmoid(np.dot(w, a)+b)
         return a
 
     def SGD(self, training_data, epochs, mini_batch_size, eta,
@@ -106,7 +109,7 @@ class Network(object):
         # feedforward
         activation = [x]
         activations = [np.array([x]).transpose()] # lista que acumula as activations em cada camada
-        zs = [] # lista que acumula as ativações sem a função de ativação
+        zs = [] # lista que acumula os valores linearizados pelos pesos
         for b, w in zip(self.biases, self.weights):
             activation = np.array(activation).transpose()
             z = np.dot(w, activation)+b
@@ -115,7 +118,7 @@ class Network(object):
             activations.append(activation)
             activation = np.array(activation).transpose()
         # deltas da última camada
-        delta = self.cost_derivative(np.array(activations[-1]).transpose(), y) * np.array(sigmoid_prime(zs[-1])).transpose()
+        delta = np.array(activations[-1]) - np.array(y)
         nabla_b[-1] = np.array(delta).transpose()
         nabla_w[-1] = np.dot(np.array(delta).transpose(), np.array(activations[-2]).transpose())
         # deltas das camadas anteriores
@@ -142,10 +145,19 @@ class Network(object):
                 acertos.append(x)
         return acertos
 
-    def cost_derivative(self, output_activations, y):
-        return (output_activations-y)
+    #def cost_derivative(self, output_activations, y):
+    #    return (output_activations-y)
 
 #### Funções de Ativação
+def ReLU(z):
+    relu_z = []
+    for x in z:
+        if x > 0:
+            relu_z.append(x)
+        else:
+            relu_z.append(0)
+    return relu_z
+
 def sigmoid(z):
     sigmoid_z = [1.0/(1.0+np.exp(-x)) for x in z]
     return sigmoid_z
@@ -162,7 +174,6 @@ import data_loader
 training_data_almoco_RU, test_data_almoco_RU, training_data_janta_RU, test_data_janta_RU = data_loader.load_data("RU")
 training_data_almoco_RS, test_data_almoco_RS, training_data_janta_RS, test_data_janta_RS = data_loader.load_data("RS")
 training_data_almoco_RA, test_data_almoco_RA, training_data_janta_RA, test_data_janta_RA = data_loader.load_data("RA")
-training_data_RU, test_data_RU = data_loader.load_data_todos("RU")
 
 net_RU = Network([4,20,20,10])
 net_RU_a = Network([4,20,20,10])
@@ -171,3 +182,5 @@ net_RS_a = Network([4,20,20,10])
 net_RS_j = Network([4,20,20,10])
 net_RA_a = Network([4,20,20,10])
 net_RA_j = Network([4,20,20,10])
+
+net_RU_a.SGD(training_data_almoco_RU, 10, 15, 0.01, test_data_almoco_RU)
